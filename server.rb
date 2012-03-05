@@ -1,9 +1,24 @@
 require 'sinatra'
+require 'pp'
+require 'base64'
+require 'redis'
+
+helpers do
+ def redis
+   @redis ||= Redis.connect
+ end
+end
+
 
 get '/' do
-  "Hello, world"
+  userid = session[:message]
+  if userid
+    erb :dashboard
+  else
+    erb :login
+  end
 end
 
 post '/' do
-  "Hello, world"
+  
 end
